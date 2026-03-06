@@ -66,16 +66,35 @@ def Summary():
 
     print("The Article has been summarized and the Summary has been Generated Successfully!!")
 
+def View_Article_Titles():
+    if not os.path.exists(Article_file):
+        print("No Articel Found !!")
+        return
+    
+    with open(Article_file, 'r', encoding='utf-8') as file:
+        articles = json.load(file)
+    
+    if not articles:
+        print("No Valid Articles found")
+        return
+    print("Article Ttitles : ")
+    for i, article in enumerate(articles, start = 1):
+            title = article.get('title', 'No Title')
+            print(f"{i}. {title}")
+
 def main():
     print("=====Welcome TO Console Based Newsd Application System=====")
     print("a) Fetch Article")
     print("b) Generate Summary")
+    print("c) View Article Titles")
 
     choice = input("Choice : ")
     if choice == 'a':
         fetch_articles()
     elif choice == 'b':
         Summary()
+    elif choice == 'c':
+        View_Article_Titles()
 
 main()
 
